@@ -2,10 +2,17 @@ import React, { Component } from 'react'
 import './Army.css'
 
 import Building from '../building/Building'
+import Unit from '../unit/Unit'
 
 function renderBuildings(buildings) {
   return buildings.map((building, index) => {
-    return <Building key={index} building={building} />
+    return <Building key={`building-${index}`} building={building} />
+  })
+}
+
+function renderUnits(units) {
+  return units.map((unit, index) => {
+    return <Unit key={`unit-${index}`} unit={unit} />
   })
 }
 
@@ -30,6 +37,7 @@ class Army extends Component {
     return (
       <div>
         { renderBuildings(this.state.buildings) }
+        { renderUnits(this.state.units) }
       </div>
     )
   }

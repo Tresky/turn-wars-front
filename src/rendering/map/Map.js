@@ -8,13 +8,13 @@ import Army from '../army/Army'
 
 function renderLayers(layers) {
   return layers.map((layer, index) => {
-    return <MapLayer key={index} layer={layer} />
+    return <MapLayer key={`layer-${index}`} layer={layer} />
   })
 }
 
 function renderArmies(armies) {
   return armies.map((army, index) => {
-    return <Army key={index} army={army} />
+    return <Army key={`army-${index}`} army={army} />
   })
 }
 
