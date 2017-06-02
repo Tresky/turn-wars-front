@@ -41,6 +41,28 @@ class Renderer {
       this.drawFillRect(x, y, width, height, color)
     }
   }
+
+  drawLine(x1, y1, x2, y2, color) {
+    if (!this.ctx) { return }
+    if (!color) {
+      color = 'black'
+    }
+    this.ctx.strokeStyle = color
+
+    this.ctx.beginPath()
+    this.ctx.moveTo(x1, y1)
+    this.ctx.lineTo(x2, y2)
+    this.ctx.stroke()
+  }
+
+  drawGrid(width, height, tileWidth, tileHeight, offsetX, offsetY) {
+    for (let row = 0; row < height; row++) {
+      this.drawLine(0, row * tileHeight, width * tileWidth, row * tileHeight, 'black')
+    }
+    for (let col = 0; col < height; col++) {
+      this.drawLine(col * tileWidth, 0, col * tileHeight, height * tileWidth, 'black')
+    }
+  }
 }
 
 let renderer = new Renderer()
