@@ -7,7 +7,7 @@ class MapTile extends Component {
   constructor(props) {
     super(props)
 
-    console.log('MapTile', props)
+    // console.log('MapTile', props)
     this.state = {
       tile: props.tile,
       position: {

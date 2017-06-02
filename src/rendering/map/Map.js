@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
 import './Map.css'
 
+import renderer from '../../modules/renderer'
+
 import MapLayer from '../mapLayer/MapLayer'
+import Army from '../army/Army'
 
 function renderLayers(layers) {
   return layers.map((layer, index) => {
-    return <MapLayer key={index} layer={layer}/>
+    return <MapLayer key={index} layer={layer} />
+  })
+}
+
+function renderArmies(armies) {
+  return armies.map((army, index) => {
+    return <Army key={index} army={army} />
   })
 }
 
@@ -23,13 +32,26 @@ class Map extends Component {
     }
   }
 
-  componentDidMount() {}
-  componentDidUpdate() {}
+  renderGrid() {
+    let height = this.state.layers[0].tiles.length
+    let width = this.state.layers[0].tiles[0].length
+    renderer.drawGrid(width, height, 32, 32, 0, 0)
+  }
+
+  componentDidMount() {
+    this.renderGrid()
+  }
+  componentDidUpdate() {
+    this.renderGrid()
+  }
 
   render() {
+
+
     return (
       <div>
         { renderLayers(this.state.layers) }
+        { renderArmies(this.state.armies) }
       </div>
     )
   }
