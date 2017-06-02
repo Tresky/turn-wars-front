@@ -38,7 +38,7 @@ class Unit extends Component {
         return
     }
 
-    renderer.drawFillRect(this.state.coordinate.x * 32, this.state.coordinate.y * 32, 32, 32, color)
+    renderer.drawRect(this.state.coordinate.x, this.state.coordinate.y, color, 'fill')
   }
 
   componentDidMount() {

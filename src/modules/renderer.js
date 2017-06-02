@@ -9,6 +9,9 @@ class Renderer {
     if (id) {
       this.findCanvas(id)
     }
+
+    this.tileWidth = 96
+    this.tileHeight = 96
   }
 
   findCanvas (id) {
@@ -34,11 +37,11 @@ class Renderer {
     this.ctx.fillRect(x, y, width, height)
   }
 
-  drawRect (x, y, width, height, color, fillOrStroke) {
+  drawRect (x, y, color, fillOrStroke) {
     if (fillOrStroke === 'stroke') {
-      this.drawStrokeRect(x, y, width, height, color)
+      this.drawStrokeRect(x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight, color)
     } else if (fillOrStroke === 'fill') {
-      this.drawFillRect(x, y, width, height, color)
+      this.drawFillRect(x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight, color)
     }
   }
 
@@ -50,17 +53,17 @@ class Renderer {
     this.ctx.strokeStyle = color
 
     this.ctx.beginPath()
-    this.ctx.moveTo(x1, y1)
-    this.ctx.lineTo(x2, y2)
+    this.ctx.moveTo(x1 * this.tileWidth, y1 * this.tileHeight)
+    this.ctx.lineTo(x2 * this.tileWidth, y2 * this.tileHeight)
     this.ctx.stroke()
   }
 
-  drawGrid(width, height, tileWidth, tileHeight, offsetX, offsetY) {
+  drawGrid(width, height, offsetX, offsetY) {
     for (let row = 0; row < height; row++) {
-      this.drawLine(0, row * tileHeight, width * tileWidth, row * tileHeight, 'black')
+      this.drawLine(0, row, width, row, 'black')
     }
     for (let col = 0; col < height; col++) {
-      this.drawLine(col * tileWidth, 0, col * tileHeight, height * tileWidth, 'black')
+      this.drawLine(col, 0, col, height, 'black')
     }
   }
 }

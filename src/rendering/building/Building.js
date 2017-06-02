@@ -21,7 +21,7 @@ class Building extends Component {
       color = 'rgba(255, 0, 0, 0.6)'
     }
 
-    renderer.drawFillRect(this.state.coordinate.x * 32, this.state.coordinate.y * 32, 32, 32, color)
+    renderer.drawRect(this.state.coordinate.x, this.state.coordinate.y, color, 'fill')
   }
 
   componentDidMount() {

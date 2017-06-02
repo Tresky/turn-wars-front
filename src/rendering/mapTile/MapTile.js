@@ -18,11 +18,8 @@ class MapTile extends Component {
   }
 
   renderTile() {
-    let tileWidth = 32
-    let tileHeight = 32
-
     let color = (this.state.tile === 'grass') ? 'green': 'gray'
-    renderer.drawFillRect(this.state.position.x * tileWidth, this.state.position.y * tileWidth, tileWidth, tileHeight, color)
+    renderer.drawRect(this.state.position.x, this.state.position.y, color, 'fill')
   }
 
   componentDidMount() {
