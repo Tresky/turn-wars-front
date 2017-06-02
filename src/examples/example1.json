@@ -1,0 +1,569 @@
+{
+    "scenario": {
+        "board": {
+            "tiles": [
+                [
+                    "grass",
+                    "rocks",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ],
+                [
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass",
+                    "grass"
+                ]
+            ],
+            "tile_data": {
+                "grass": {
+                    "non_passables": [],
+                    "events": [],
+                    "cover": 0
+                },
+                "rocks": {
+                    "non_passables": [
+                        "tires"
+                    ],
+                    "events": [],
+                    "cover": 0
+                }
+            }
+        },
+        "armies": [
+            {
+                "name": "dragon",
+                "units": [
+                    {
+                        "name": "footman",
+                        "transport": {
+                            "name": "foot",
+                            "spaces_left": 2,
+                            "fuel": -1
+                        },
+                        "weapon": {
+                            "name": "sword",
+                            "attack_strength": 1,
+                            "non_targetables": "",
+                            "range": 1,
+                            "uses_left": 1
+                        },
+                        "armor": {
+                            "name": "plate",
+                            "health": 10
+                        },
+                        "coordinate": {
+                            "x": 1,
+                            "y": 0
+                        },
+                        "army": "dragon",
+                        "id": 140286662792920
+                    },
+                    {
+                        "name": "footman",
+                        "transport": {
+                            "name": "foot",
+                            "spaces_left": 2,
+                            "fuel": -1
+                        },
+                        "weapon": {
+                            "name": "sword",
+                            "attack_strength": 1,
+                            "non_targetables": "",
+                            "range": 1,
+                            "uses_left": 1
+                        },
+                        "armor": {
+                            "name": "plate",
+                            "health": 10
+                        },
+                        "coordinate": {
+                            "x": 5,
+                            "y": 5
+                        },
+                        "army": "dragon",
+                        "id": 140286662793200
+                    }
+                ],
+                "buildings": [
+                    {
+                        "name": "castle",
+                        "coordinate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "buildable_units": [
+                            "dragon",
+                            "catapult",
+                            "horseman"
+                        ]
+                    }
+                ],
+                "turn": 1,
+                "unit_data": {
+                    "armor": {
+                        "plate": {
+                            "starting_health": 10
+                        },
+                        "leather": {
+                            "starting_health": 5
+                        },
+                        "cloth": {
+                            "starting_health": 1
+                        },
+                        "scale": {
+                            "starting_health": 25
+                        },
+                        "wood": {
+                            "starting_health": 1
+                        }
+                    },
+                    "weapon": {
+                        "sword": {
+                            "uses": 30,
+                            "uses_per_turn": 1,
+                            "attack_strength": 1,
+                            "range": 1
+                        },
+                        "fire_breath": {
+                            "uses": 30,
+                            "attack_strength": 6,
+                            "uses_per_turn": 1
+                        },
+                        "boulder": {
+                            "uses": 5,
+                            "attack_strength": 8,
+                            "uses_per_turn": 1
+                        },
+                        "lance": {
+                            "uses": 10,
+                            "attack_strength": 4,
+                            "uses_per_turn": 1
+                        }
+                    },
+                    "transport": {
+                        "foot": {
+                            "spaces_per_turn": 2,
+                            "cost_table": {
+                                "grass": 1,
+                                "rocks": 2
+                            }
+                        },
+                        "wheel": {
+                            "spaces_per_turn": 2,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        },
+                        "wing": {
+                            "spaces_per_turn": 7,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        },
+                        "horse": {
+                            "spaces_per_turn": 5,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        }
+                    },
+                    "units": {
+                        "footman": {
+                            "transport": "foot",
+                            "weapon": "sword",
+                            "armor": "plate",
+                            "cost": 100
+                        },
+                        "dragon": {
+                            "transport": "wing",
+                            "weapon": "fire_breath",
+                            "armor": "scale",
+                            "cost": 1000
+                        },
+                        "catapult": {
+                            "transport": "wheel",
+                            "weapon": "boulder",
+                            "armor": "wood",
+                            "cost": 1000
+                        },
+                        "horseman": {
+                            "transport": "horse",
+                            "weapon": "lance",
+                            "armor": "plate",
+                            "cost": 600
+                        }
+                    }
+                },
+                "building_data": {
+                    "fort": {
+                        "buildable_units": [
+                            "footman"
+                        ],
+                        "revenue": 100
+                    },
+                    "castle": {
+                        "buildable_units": [
+                            "dragon",
+                            "catapult",
+                            "horseman"
+                        ],
+                        "revenue": 500
+                    }
+                }
+            },
+            {
+                "name": "salamander",
+                "units": [
+                    {
+                        "name": "footman",
+                        "transport": {
+                            "name": "foot",
+                            "spaces_left": 2,
+                            "fuel": -1
+                        },
+                        "weapon": {
+                            "name": "sword",
+                            "attack_strength": 1,
+                            "non_targetables": "",
+                            "range": 1,
+                            "uses_left": 1
+                        },
+                        "armor": {
+                            "name": "plate",
+                            "health": 10
+                        },
+                        "coordinate": {
+                            "x": 10,
+                            "y": 11
+                        },
+                        "army": "salamander",
+                        "id": 140286662794096
+                    },
+                    {
+                        "name": "footman",
+                        "transport": {
+                            "name": "foot",
+                            "spaces_left": 2,
+                            "fuel": -1
+                        },
+                        "weapon": {
+                            "name": "sword",
+                            "attack_strength": 1,
+                            "non_targetables": "",
+                            "range": 1,
+                            "uses_left": 1
+                        },
+                        "armor": {
+                            "name": "plate",
+                            "health": 10
+                        },
+                        "coordinate": {
+                            "x": 6,
+                            "y": 5
+                        },
+                        "army": "salamander",
+                        "id": 140286662794376
+                    }
+                ],
+                "buildings": [
+                    {
+                        "name": "castle",
+                        "coordinate": {
+                            "x": 11,
+                            "y": 11
+                        },
+                        "buildable_units": [
+                            "dragon",
+                            "catapult",
+                            "horseman"
+                        ]
+                    }
+                ],
+                "turn": 0,
+                "unit_data": {
+                    "armor": {
+                        "plate": {
+                            "starting_health": 10
+                        },
+                        "leather": {
+                            "starting_health": 5
+                        },
+                        "cloth": {
+                            "starting_health": 1
+                        },
+                        "scale": {
+                            "starting_health": 25
+                        },
+                        "wood": {
+                            "starting_health": 1
+                        }
+                    },
+                    "weapon": {
+                        "sword": {
+                            "uses": 30,
+                            "uses_per_turn": 1,
+                            "attack_strength": 1,
+                            "range": 1
+                        },
+                        "fire_breath": {
+                            "uses": 30,
+                            "attack_strength": 6,
+                            "uses_per_turn": 1
+                        },
+                        "boulder": {
+                            "uses": 5,
+                            "attack_strength": 8,
+                            "uses_per_turn": 1
+                        },
+                        "lance": {
+                            "uses": 10,
+                            "attack_strength": 4,
+                            "uses_per_turn": 1
+                        }
+                    },
+                    "transport": {
+                        "foot": {
+                            "spaces_per_turn": 2,
+                            "cost_table": {
+                                "grass": 1,
+                                "rocks": 2
+                            }
+                        },
+                        "wheel": {
+                            "spaces_per_turn": 2,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        },
+                        "wing": {
+                            "spaces_per_turn": 7,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        },
+                        "horse": {
+                            "spaces_per_turn": 5,
+                            "cost_table": {
+                                "grass": 1
+                            }
+                        }
+                    },
+                    "units": {
+                        "footman": {
+                            "transport": "foot",
+                            "weapon": "sword",
+                            "armor": "plate",
+                            "cost": 100
+                        },
+                        "dragon": {
+                            "transport": "wing",
+                            "weapon": "fire_breath",
+                            "armor": "scale",
+                            "cost": 1000
+                        },
+                        "catapult": {
+                            "transport": "wheel",
+                            "weapon": "boulder",
+                            "armor": "wood",
+                            "cost": 1000
+                        },
+                        "horseman": {
+                            "transport": "horse",
+                            "weapon": "lance",
+                            "armor": "plate",
+                            "cost": 600
+                        }
+                    }
+                },
+                "building_data": {
+                    "fort": {
+                        "buildable_units": [
+                            "footman"
+                        ],
+                        "revenue": 100
+                    },
+                    "castle": {
+                        "buildable_units": [
+                            "dragon",
+                            "catapult",
+                            "horseman"
+                        ],
+                        "revenue": 500
+                    }
+                }
+            }
+        ]
+    },
+    "timestamp": 1491689132
+}
