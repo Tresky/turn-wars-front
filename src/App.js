@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import Canvas from './canvas/Canvas'
+import './modules/renderer'
+import Canvas from './rendering/canvas/Canvas'
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {}
+  }
+
   render() {
+
     return (
       <div className="game-container">
         <Canvas />
