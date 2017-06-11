@@ -12,7 +12,7 @@ class Canvas extends Component {
   constructor() {
     super()
     this.state = {
-      data: example
+      data: null
     }
 
     // Boolean array that holds the scrolls state of each direction.
@@ -175,7 +175,9 @@ class Canvas extends Component {
   render() {
     return (
       <canvas id="game-canvas">
-        <Map scenario={this.state.data.scenario} />
+        {
+          (this.state.data) ? <Map scenario={this.state.data.scenario} />: ''
+        }
       </canvas>
     )
   }
