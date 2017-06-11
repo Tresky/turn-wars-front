@@ -35,7 +35,7 @@ class Map extends Component {
   renderGrid() {
     let height = this.state.layers[0].tiles.length
     let width = this.state.layers[0].tiles[0].length
-    renderer.drawGrid(width, height, 32, 32, 0, 0)
+    renderer.drawGrid(width, height)
   }
 
   componentDidMount() {

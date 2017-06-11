@@ -58,13 +58,31 @@ class Renderer {
     this.ctx.stroke()
   }
 
-  drawGrid(width, height, offsetX, offsetY) {
+  drawGrid(width, height) {
     for (let row = 0; row < height; row++) {
       this.drawLine(0, row, width, row, 'black')
     }
     for (let col = 0; col < height; col++) {
       this.drawLine(col, 0, col, height, 'black')
     }
+  }
+
+  clear() {
+    if (this.canvas) {
+      // Save the current transformation matrix
+      this.ctx.save()
+
+      // Reset the transformation matrix and clear
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+      // Restore the previous transformation matrix
+      this.ctx.restore()
+    }
+  }
+
+  setOffset(xOffset, yOffset) {
+    this.ctx.translate(xOffset, yOffset)
   }
 }
 
