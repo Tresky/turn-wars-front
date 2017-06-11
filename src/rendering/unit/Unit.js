@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import './Unit.css'
 
 import renderer from '../../modules/renderer'
