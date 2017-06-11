@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import './App.css'
 
 import './modules/renderer'
+import './modules/stateRenderer'
 import Canvas from './rendering/canvas/Canvas'
 
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {}
-  }
-
   render() {
 
     return (

@@ -4,15 +4,14 @@ import './Canvas.css'
 import includes from 'lodash/includes'
 
 import renderer from '../../modules/renderer'
+import stateRenderer from '../../modules/stateRenderer'
 import example from '../../examples/example1.json';
-
-import Map from '../map/Map'
 
 class Canvas extends Component {
   constructor() {
     super()
     this.state = {
-      data: null
+      data: example
     }
 
     // Boolean array that holds the scrolls state of each direction.
@@ -101,7 +100,7 @@ class Canvas extends Component {
       offset.y -= step
     }
 
-    renderer.setOffset(offset.x, offset.y)
+    stateRenderer.setOffset(offset.x, offset.y)
   }
 
   /**
@@ -112,16 +111,6 @@ class Canvas extends Component {
   update() {
     // Set offset
     this.handleScroll()
-
-    // Force redraw
-    this.setState(this.state)
-  }
-
-  /**
-   * Clear the screen before a redraw.
-   */
-  componentWillUpdate() {
-    renderer.clear()
   }
 
   /**
@@ -166,7 +155,7 @@ class Canvas extends Component {
     console.log('Example', this.state.data)
     renderer.findCanvas('game-canvas')
 
-    this.setState(this.state)
+    stateRenderer.setState(this.state.data)
   }
 
   /**
@@ -174,11 +163,7 @@ class Canvas extends Component {
    */
   render() {
     return (
-      <canvas id="game-canvas">
-        {
-          (this.state.data) ? <Map scenario={this.state.data.scenario} />: ''
-        }
-      </canvas>
+      <canvas id="game-canvas"></canvas>
     )
   }
 }
