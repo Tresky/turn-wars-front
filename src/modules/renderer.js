@@ -45,7 +45,7 @@ class Renderer {
     }
   }
 
-  drawLine(x1, y1, x2, y2, color) {
+  drawLine (x1, y1, x2, y2, color) {
     if (!this.ctx) { return }
     if (!color) {
       color = 'black'
@@ -58,7 +58,7 @@ class Renderer {
     this.ctx.stroke()
   }
 
-  drawGrid(width, height) {
+  drawGrid (width, height) {
     for (let row = 0; row < height; row++) {
       this.drawLine(0, row, width, row, 'black')
     }
@@ -67,7 +67,7 @@ class Renderer {
     }
   }
 
-  clear() {
+  clear () {
     if (this.canvas) {
       // Save the current transformation matrix
       this.ctx.save()
@@ -81,7 +81,7 @@ class Renderer {
     }
   }
 
-  setOffset(xOffset, yOffset) {
+  setOffset (xOffset, yOffset) {
     this.ctx.translate(xOffset, yOffset)
   }
 }
