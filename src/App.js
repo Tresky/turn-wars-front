@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import './App.css'
 
 import './modules/renderer'
-import './modules/stateRenderer'
-import Canvas from './rendering/canvas/Canvas'
+import stateRenderer from './modules/stateRenderer'
+import Game from './rendering/game/Game'
 
 class App extends Component {
   render() {
 
     return (
-      <div className="game-container">
-        <Canvas />
+      <div className="turn-wars-wrapper">
+        { (this.state.currentState === 'ingame') ? <Game /> : '' }
       </div>
     )
   }
