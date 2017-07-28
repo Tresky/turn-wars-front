@@ -2,10 +2,19 @@ import React, { Component } from 'react'
 import './App.css'
 
 import './modules/renderer'
-import stateRenderer from './modules/stateRenderer'
+import './modules/socket'
 import Game from './rendering/game/Game'
 
 class App extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      // splash -> mainMenu -> matchList -> matchLobby -> ingame
+      currentState: 'ingame' 
+    }
+  }
+
   render() {
 
     return (

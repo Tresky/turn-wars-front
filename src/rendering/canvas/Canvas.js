@@ -5,13 +5,12 @@ import includes from 'lodash/includes'
 
 import renderer from '../../modules/renderer'
 import stateRenderer from '../../modules/stateRenderer'
-import example from '../../examples/example1.json';
 
 class Canvas extends Component {
   constructor() {
     super()
     this.state = {
-      data: example
+      data: null
     }
 
     // Boolean array that holds the scrolls state of each direction.
@@ -148,7 +147,7 @@ class Canvas extends Component {
     let canvas = document.getElementById("game-canvas");
 
     // Set the size of the canvas
-    canvas.width = document.body.clientWidth;
+    canvas.width = document.body.clientWidth * 0.75;
     canvas.height = document.body.clientHeight;
 
     console.log('Renderer', renderer)

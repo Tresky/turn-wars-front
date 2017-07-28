@@ -28,6 +28,10 @@ class StateRenderer {
     this.offset = { x: 0, y: 0 }
   }
 
+  getState () {
+    return this.state
+  }
+
   setState (json) {
     if (json) {
       this.state = json
