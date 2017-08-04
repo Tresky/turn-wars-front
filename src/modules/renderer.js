@@ -1,3 +1,5 @@
+import CanvasTransform from '../helpers/canvasTransform'
+
 /**
  * Class: Renderer
  * A singleton class that allows the global scope to render
@@ -12,6 +14,8 @@ class Renderer {
 
     this.tileWidth = 96
     this.tileHeight = 96
+
+    this.transform = new CanvasTransform()
   }
 
   findCanvas (id) {
@@ -23,6 +27,8 @@ class Renderer {
       this.ctx = this.canvas.getContext('2d')
       console.log('Canvas Context Acquired')
     }
+
+    return this.canvas
   }
 
   drawStrokeRect (x, y, width, height, color) {
@@ -81,8 +87,22 @@ class Renderer {
     }
   }
 
+  getTransform (clone) {
+    return (clone) ? new CanvasTransform(this.transform.m) : this.transform.m
+  }
+
   setOffset (xOffset, yOffset) {
-    this.ctx.translate(xOffset, yOffset)
+    this.transform.translate(xOffset, yOffset)
+
+    let m = this.transform.m
+    this.ctx.setTransform(m[0], m[1], m[2], m[3], m[4], m[5])
+  }
+
+  convertCanvasCoordsToTileCoords (x, y) {
+    return {
+      x: parseInt(x / this.tileWidth, 10),
+      y: parseInt(y / this.tileHeight, 10)
+    }
   }
 }
 

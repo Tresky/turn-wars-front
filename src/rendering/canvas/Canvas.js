@@ -6,6 +6,8 @@ import includes from 'lodash/includes'
 import renderer from '../../modules/renderer'
 import stateRenderer from '../../modules/stateRenderer'
 
+import CanvasTransform from '../../helpers/canvasTransform'
+
 class Canvas extends Component {
   constructor() {
     super()
@@ -144,11 +146,18 @@ class Canvas extends Component {
    * give each child element another chance to draw itself.
    */
   componentDidMount() {
-    let canvas = document.getElementById("game-canvas");
+    let canvas = document.getElementById("game-canvas")
 
     // Set the size of the canvas
-    canvas.width = document.body.clientWidth * 0.75;
-    canvas.height = document.body.clientHeight;
+    canvas.width = document.body.clientWidth * 0.75
+    canvas.height = document.body.clientHeight
+
+    canvas.onclick = (evt) => {
+      let pos = getCanvasCursorPosition(canvas, evt)
+      let tilePos = renderer.convertCanvasCoordsToTileCoords(pos.x, pos.y)
+
+      console.log('TilePos', tilePos)
+    }
 
     console.log('Renderer', renderer)
     console.log('Example', this.state.data)
@@ -165,6 +174,20 @@ class Canvas extends Component {
       <canvas id="game-canvas"></canvas>
     )
   }
+}
+
+/**
+ * Converts mouse click coordinates from a click event into where the
+ * click was on the transformed canvas object.
+ * @param {element} canvas Canvas object to compare against
+ * @param {object} evt Mouse click event
+ * @return {object} X and Y position of the mouse click relative to the canvas
+ */
+function getCanvasCursorPosition (canvas, evt) {
+  let rect = canvas.getBoundingClientRect()
+  let x = evt.clientX - rect.left
+  let y = evt.clientY - rect.top
+  return renderer.getTransform(true).invert().transformPoint(x, y)
 }
 
 export default Canvas;
