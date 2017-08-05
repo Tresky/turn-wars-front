@@ -25,6 +25,13 @@ function buildingColor (bldg) {
 class StateRenderer {
   constructor () {
     this.offset = { x: 0, y: 0 }
+    this.selection = undefined
+  }
+
+  _renderSelection (selection) {
+    if (selection) {
+      renderer.drawRect(selection.x, selection.y, 'yellow', 'stroke')
+    }
   }
 
   render (state) {
@@ -40,7 +47,6 @@ class StateRenderer {
           renderer.drawRect(col, row, color, 'fill')
         }
       }
-
     }
 
     // Render armies
@@ -60,6 +66,8 @@ class StateRenderer {
     }
 
     renderer.drawGrid(layers[0].tiles[0].length, layers[0].tiles.length)
+
+    this._renderSelection(state._selection)
   }
 }
 

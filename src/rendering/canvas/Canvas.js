@@ -160,6 +160,8 @@ class Canvas extends Component {
       let tilePos = renderer.convertCanvasCoordsToTileCoords(pos.x, pos.y)
 
       console.log('TilePos', tilePos)
+
+      stateStore.selectTile(tilePos.x, tilePos.y)
     }
 
     console.log('Renderer', renderer)
