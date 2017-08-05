@@ -1,6 +1,7 @@
-import stateRenderer from './stateRenderer'
-
 import includes from 'lodash/includes'
+
+import stateRenderer from './stateRenderer'
+import store from '../store.js';
 
 var clientId = undefined
 
@@ -22,6 +23,10 @@ function onmessage (json) {
       break
     case 'matchList':
       console.log('- Match List')
+      store.dispatch({
+        'type': 'UPDATE_MATCH_LIST',
+        'matches': message.matches
+      })
       break
     case 'matchLobby':
       console.log(' - Match Lobby')
@@ -33,6 +38,11 @@ function onmessage (json) {
     case 'matchInProgress':
       console.log(' - Match In Progress')
       stateRenderer.setState(message.gameState)
+      break
+    case 'addMatch':
+      store.dispatch({
+        ...message
+      })
       break
     default:
       console.log(' - Invalid Type', message.type)
@@ -119,8 +129,14 @@ class Socket {
       matchId: matchId
     }))
   }
+
+  getMatchList() {
+    this.socket.send(JSON.stringify({
+      type: 'listMatches',
+    }))
+  }
 }
 
-let socket = new Socket('ws://192.168.2.21:1026')
+let socket = new Socket('ws://192.168.50.46:1026')
 
 export default socket

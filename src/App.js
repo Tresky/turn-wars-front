@@ -4,6 +4,7 @@ import './App.css'
 import './modules/renderer'
 import './modules/socket'
 import Game from './rendering/game/Game'
+import ActiveLobby from './containers/ActiveLobby.js'
 
 class App extends Component {
   constructor () {
@@ -11,7 +12,7 @@ class App extends Component {
 
     this.state = {
       // splash -> mainMenu -> matchList -> matchLobby -> ingame
-      currentState: 'ingame' 
+      currentState: 'lobby' 
     }
   }
 
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="turn-wars-wrapper">
         { (this.state.currentState === 'ingame') ? <Game /> : '' }
+        { (this.state.currentState === 'lobby') ? <ActiveLobby /> : '' }
       </div>
     )
   }
