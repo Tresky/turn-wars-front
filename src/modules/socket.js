@@ -1,4 +1,4 @@
-import stateRenderer from './stateRenderer'
+import stateStore from './stateStore'
 
 import includes from 'lodash/includes'
 
@@ -28,11 +28,11 @@ function onmessage (json) {
       break
     case 'gameStateChange':
       console.log(' - Game State Change')
-      stateRenderer.setState(message.gameState)
+      stateStore.setState(message.gameState)
       break
     case 'matchInProgress':
       console.log(' - Match In Progress')
-      stateRenderer.setState(message.gameState)
+      stateStore.setState(message.gameState)
       break
     default:
       console.log(' - Invalid Type', message.type)
@@ -42,8 +42,8 @@ function onmessage (json) {
 
 /**
  * Class: Socket
- * A singleton class that allows the global scope to render
- * to a specified canvas object.
+ * A singleton class that allows the global scope to interact
+ * with the communication web socket.
  */
 class Socket {
   constructor (ip) {
@@ -81,7 +81,7 @@ class Socket {
         evt.preventDefault()
         evt.stopPropagation()
 
-        let newCoords = stateRenderer.getState().scenario.armies[0].units[this.testcounter % 2].coordinate
+        let newCoords = stateStore.getState().scenario.armies[0].units[this.testcounter % 2].coordinate
         newCoords.y++
 
         console.log('NEWCOORDS', newCoords)
@@ -93,7 +93,7 @@ class Socket {
           playerId: clientId,
           to: newCoords,
           unit: {
-            id: stateRenderer.getState().scenario.armies[0].units[this.testcounter % 2].id
+            id: stateStore.getState().scenario.armies[0].units[this.testcounter % 2].id
           }
         }))
 

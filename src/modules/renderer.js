@@ -15,6 +15,8 @@ class Renderer {
     this.tileWidth = 96
     this.tileHeight = 96
 
+    this.offset = { x: 0, y: 0 }
+
     this.transform = new CanvasTransform()
   }
 
@@ -91,11 +93,16 @@ class Renderer {
     return (clone) ? new CanvasTransform(this.transform.m) : this.transform.m
   }
 
+  getOffset () {
+    return this.offset
+  }
+
   setOffset (xOffset, yOffset) {
     this.transform.translate(xOffset, yOffset)
 
     let m = this.transform.m
     this.ctx.setTransform(m[0], m[1], m[2], m[3], m[4], m[5])
+    this.offset = { x: xOffset, y: yOffset }
   }
 
   convertCanvasCoordsToTileCoords (x, y) {

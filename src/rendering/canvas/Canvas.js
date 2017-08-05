@@ -4,7 +4,7 @@ import './Canvas.css'
 import includes from 'lodash/includes'
 
 import renderer from '../../modules/renderer'
-import stateRenderer from '../../modules/stateRenderer'
+import stateStore from '../../modules/stateStore'
 
 import CanvasTransform from '../../helpers/canvasTransform'
 
@@ -101,7 +101,10 @@ class Canvas extends Component {
       offset.y -= step
     }
 
-    stateRenderer.setOffset(offset.x, offset.y)
+    if (offset.x !== 0 || offset.y !== 0) {
+      renderer.setOffset(offset.x, offset.y)
+      stateStore.renderState()
+    }
   }
 
   /**
@@ -163,7 +166,7 @@ class Canvas extends Component {
     console.log('Example', this.state.data)
     renderer.findCanvas('game-canvas')
 
-    stateRenderer.setState(this.state.data)
+    stateStore.setState(this.state.data)
   }
 
   /**
