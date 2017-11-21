@@ -24,51 +24,33 @@ function buildingColor (bldg) {
 
 class StateRenderer {
   constructor () {
-    this.state = null
     this.offset = { x: 0, y: 0 }
+    this.selection = undefined
   }
 
-  getState () {
-    return this.state
-  }
-
-  setState (json) {
-    if (json) {
-      this.state = json
-
-      this.render()
+  _renderSelection (selection) {
+    if (selection) {
+      renderer.drawRect(selection.coords.x, selection.coords.y, 'yellow', 'stroke')
     }
   }
 
-  setOffset (xOffset, yOffset) {
-    // If the offset hasn't changed, don't worry about redrawing.
-    if (this.offset.x === xOffset && this.offset.y === yOffset) {
-      return
-    }
-
-    renderer.setOffset(xOffset, yOffset)
-    this.render()
-  }
-
-  render () {
-    console.log('Rendering Game State', this.state)
+  render (state) {
+    console.log('Rendering Game State', state)
     renderer.clear()
 
     // Render layers
-    let layers = [this.state.scenario.board] // temporary methodology
+    let layers = [state.scenario.board] // temporary methodology
     for (let layer of layers) {
-      console.log(layer)
       for (let row = 0; row < layer.tiles.length; row++) {
         for (let col = 0; col < layer.tiles[row].length; col++) {
           let color = tileColor(layer.tiles[row][col])
           renderer.drawRect(col, row, color, 'fill')
         }
       }
-
     }
 
     // Render armies
-    let armies = this.state.scenario.armies
+    let armies = state.scenario.armies
     for (let army of armies) {
       let units = army.units
       for (let unit of units) {
@@ -84,6 +66,8 @@ class StateRenderer {
     }
 
     renderer.drawGrid(layers[0].tiles[0].length, layers[0].tiles.length)
+
+    this._renderSelection(state._selection)
   }
 }
 

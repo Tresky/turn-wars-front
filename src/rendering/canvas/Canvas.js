@@ -4,9 +4,11 @@ import './Canvas.css'
 import includes from 'lodash/includes'
 
 import renderer from '../../modules/renderer'
-import stateRenderer from '../../modules/stateRenderer'
+import stateStore from '../../modules/stateStore'
 
 import CanvasTransform from '../../helpers/canvasTransform'
+
+const translateSpeed = 10
 
 class Canvas extends Component {
   constructor() {
@@ -24,6 +26,9 @@ class Canvas extends Component {
       up: false,
       down: false,
 
+      // Is the camera panning diagonally? This effects scroll speed.
+      diagonal: false,
+
       /**
        * Using a key code from a key event as a target, set the value
        * in the translateDir boolean array appropriately.
@@ -35,6 +40,14 @@ class Canvas extends Component {
         this.right = (keyCode === 'ArrowRight') ? value : this.right,
         this.up    = (keyCode === 'ArrowUp')    ? value : this.up,
         this.down  = (keyCode === 'ArrowDown')  ? value : this.down
+
+        // These ternarys are XOR operations. These are solely for determining
+        // if the camera is panning diagonally or not.
+        let horizontalPan = this.left ? !this.right : this.right
+        let verticalPan = this.up ? !this.down : this.down
+
+        // Set if the screen is moving diagonally
+        this.diagonal = horizontalPan || verticalPan
       }
     }
 
@@ -80,7 +93,8 @@ class Canvas extends Component {
    * much to translate the canvas.
    */
   handleScroll() {
-    let step = 10
+    // If the camera is moving diagonally, move at speed * sin(45).
+    let step = this.translateDir.diagonal ? translateSpeed * 0.707 : translateSpeed
 
     // Addition and subtraction are used (as opposed to using
     // equals) to allow for two opposing keys (left and right)
@@ -101,7 +115,10 @@ class Canvas extends Component {
       offset.y -= step
     }
 
-    stateRenderer.setOffset(offset.x, offset.y)
+    if (offset.x !== 0 || offset.y !== 0) {
+      renderer.setOffset(offset.x, offset.y)
+      stateStore.renderState()
+    }
   }
 
   /**
@@ -157,13 +174,15 @@ class Canvas extends Component {
       let tilePos = renderer.convertCanvasCoordsToTileCoords(pos.x, pos.y)
 
       console.log('TilePos', tilePos)
+
+      stateStore.selectTile(tilePos.x, tilePos.y)
     }
 
     console.log('Renderer', renderer)
     console.log('Example', this.state.data)
     renderer.findCanvas('game-canvas')
 
-    stateRenderer.setState(this.state.data)
+    stateStore.setState(this.state.data)
   }
 
   /**
