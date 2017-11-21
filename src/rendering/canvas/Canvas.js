@@ -25,6 +25,8 @@ class Canvas extends Component {
       right: false,
       up: false,
       down: false,
+
+      // Is the camera panning diagonally? This effects scroll speed.
       diagonal: false,
 
       /**
