@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 import MatchListing from './MatchListing.js';
+import './Lobby.css';
 
-class Lobby extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-    this.props.onMount()
-  }
-
-  render() { 
-    console.log(this.props.matches)
-    return (
-      <div className="lobby-list">
-        {this.props.matches.map((element) => {
-          return (
-            <MatchListing key={element} {...element}/>
-          )
-        })}
-      </div>
-    )
-  }
-}
+const Lobby = ({playerId, matches, onRequestJoin}) =>  (
+  <div className="lobby-list">
+    {matches.map((element, idx) => {
+      return (
+        <div key={element.id} onClick={function() { console.log('called'); onRequestJoin(playerId, element.id) }}  className={`parity-${idx % 2 == 0 ? 'even' : 'odd'}`}>
+          <MatchListing {...element}/>
+        </div>
+      )
+    })}
+  </div>
+)
 
 export default Lobby

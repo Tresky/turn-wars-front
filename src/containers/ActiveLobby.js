@@ -8,16 +8,15 @@ const getAvailableMatches = (matches) => {
 
 const mapStateToProps = state => {
   return {
-    matches: getAvailableMatches(state.matches.list)
+    matches: getAvailableMatches(state.matches.list),
+    playerId: state.matches.playerId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMount: () => {
-      setInterval(() => {
-        socket.getMatchList()
-      }, 10000)
+    onRequestJoin: (playerId, matchId) => {
+      socket.requestJoin(playerId, matchId)
     }
   }
 }

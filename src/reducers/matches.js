@@ -1,6 +1,7 @@
-
 const defaultState = {
-  'list': []
+  'list': [],
+  'status': 'browsing',
+  'playerId': '',
 }
 
 const matches = (state=defaultState, action) => {
@@ -10,6 +11,17 @@ const matches = (state=defaultState, action) => {
       return {
         ...state,
         list: action.matches
+      }
+    case 'REQUEST_JOIN':
+      console.log('joining');
+      return {
+        ...state,
+        status: 'joining',
+      }
+    case 'UPDATE_PLAYER_ID':
+      return {
+        ...state,
+        playerId: action.id,
       }
     default:
       return state

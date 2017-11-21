@@ -4,6 +4,7 @@ import stateRenderer from './stateRenderer'
 import store from '../store.js';
 
 var clientId = undefined
+var serverAddress = "192.168.2.20"
 
 function onmessage (json) {
   let message = JSON.parse(json.data)
@@ -19,10 +20,14 @@ function onmessage (json) {
     case 'accept':
       console.log(' - Accept')
       clientId = message.playerId
-      this.requestJoin(message.playerId, '00000000000000000000000000000000')
+      store.dispatch({
+        'type': 'UPDATE_PLAYER_ID',
+        'id': message.playerId,
+      })
+      this.getMatchList()
       break
     case 'matchList':
-      console.log('- Match List')
+      console.log(message)
       store.dispatch({
         'type': 'UPDATE_MATCH_LIST',
         'matches': message.matches
@@ -33,10 +38,18 @@ function onmessage (json) {
       break
     case 'gameStateChange':
       console.log(' - Game State Change')
+      store.dispatch({
+        'type': 'UPDATE_APP_STATE',
+        'state': 'ingame'
+      })
       stateRenderer.setState(message.gameState)
       break
     case 'matchInProgress':
       console.log(' - Match In Progress')
+      store.dispatch({
+        'type': 'UPDATE_APP_STATE',
+        'state': 'ingame'
+      })
       stateRenderer.setState(message.gameState)
       break
     case 'addMatch':
@@ -131,12 +144,13 @@ class Socket {
   }
 
   getMatchList() {
+    console.log('sending listMatches')
     this.socket.send(JSON.stringify({
       type: 'listMatches',
     }))
   }
 }
 
-let socket = new Socket('ws://192.168.50.46:1026')
+let socket = new Socket(`ws://${serverAddress}:1026`)
 
 export default socket
