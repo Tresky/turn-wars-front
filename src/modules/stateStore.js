@@ -1,5 +1,6 @@
 import stateRenderer from './stateRenderer'
 
+import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 
 import TileStore from './tileStore'
@@ -31,16 +32,22 @@ class StateStore {
   }
 
   selectTile (x, y) {
+    const objectsAtLocation = this.objectsAtLocation(x, y)
+
     this.selection = { x: x, y: y }
-    this.state._selection = this.selection
+    this.state._selection = {
+      coords: this.selection,
+      objects: objectsAtLocation
+    }
+
     this.renderState()
 
-    return this.objectsAtLocation(x, y)
+    return cloneDeep(this.state._selection)
   }
 
   objectsAtLocation (x, y) {
     return {
-      tiles: this.tileStore.atLocation(x, y)
+      tiles: this.tileStore.atLocation(x, y),
     }
   }
 

@@ -30,7 +30,7 @@ class StateRenderer {
 
   _renderSelection (selection) {
     if (selection) {
-      renderer.drawRect(selection.x, selection.y, 'yellow', 'stroke')
+      renderer.drawRect(selection.coords.x, selection.coords.y, 'yellow', 'stroke')
     }
   }
 
