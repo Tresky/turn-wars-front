@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 
 import TileStore from './tileStore'
-import UnitStore from './unitStore'
+import ArmyStore from './armyStore'
 
 class StateStore {
   constructor () {
@@ -12,7 +12,7 @@ class StateStore {
     this.selection = undefined
 
     this.tileStore = new TileStore()
-    this.unitStore = new UnitStore()
+    this.armyStore = new ArmyStore()
   }
 
   getState () {
@@ -48,16 +48,15 @@ class StateStore {
   }
 
   objectsAtLocation (x, y) {
-    return {
-      tiles: this.tileStore.atLocation(x, y),
-      units: this.unitStore.atLocation(x, y)
-    }
+    return merge({
+      tiles: this.tileStore.atLocation(x, y)
+    }, this.armyStore.atLocation(x, y))
   }
 
   _processState () {
     let layers = [this.state.scenario.board] // temp
     this.tileStore.processTiles(layers)
-    this.unitStore.processArmies(this.state.scenario.armies)
+    this.armyStore.processArmies(this.state.scenario.armies)
   }
 }
 

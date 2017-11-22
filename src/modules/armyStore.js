@@ -7,18 +7,19 @@ import sortedIndexBy from 'lodash/sortedIndexBy'
 
 // TODO: Include Buildings in this store as well: Change UnitStore -> ArmyStore
 
-function sortUnitsByCoordinates (arr) {
+function sortObjectsByCoordinates (arr) {
   return arr.sort((unitA, unitB) => unitA.coordinate.x - unitB.coordinate.x || unitA.coordinate.y - unitB.coordinate.y);
 }
 
 function processArmy (army) {
   return {
-    units: sortUnitsByCoordinates(army.units)
+    units: sortObjectsByCoordinates(army.units),
+    buildings: sortObjectsByCoordinates(army.buildings)
   }
 }
 
-function combineArmies (allArmies) {
-  let armies = map(allArmies, army => army.units)
+function combineBy (allArmies, combineBy) {
+  let armies = map(allArmies, army => army[combineBy])
 
   // Helper function that will push the first element from an array into the
   // destination array. If the source array is empty, don't do anything.
@@ -59,7 +60,7 @@ function combineArmies (allArmies) {
   return results
 }
 
-class UnitStore {
+class ArmyStore {
   constructor () {
     this.unit = undefined
     this.armies = undefined
@@ -74,13 +75,21 @@ class UnitStore {
     }
 
     // Add all units into a single array for easier searching.
-    this.store = combineArmies(cloneDeep(this.armies))
-    console.log(map(this.store, unit => unit.coordinate))
+    this.store = {
+      units: combineBy(cloneDeep(this.armies), 'units'),
+      buildings: combineBy(cloneDeep(this.armies), 'buildings')
+    }
+    // this.store = combineArmies(cloneDeep(this.armies))
+    console.log('Store', this.store)
+    // console.log(map(this.store, unit => unitunits))
   }
 
   atLocation (x, y) {
-    return filter(this.store, unit => unit.coordinate.x === x && unit.coordinate.y === y)
+    return {
+      units: filter(this.store.units, unit => unit.coordinate.x === x && unit.coordinate.y === y),
+      buildings: filter(this.store.buildings, bldg => bldg.coordinate.x === x && bldg.coordinate.y === y)
+    }
   }
 }
 
-export default UnitStore
+export default ArmyStore
