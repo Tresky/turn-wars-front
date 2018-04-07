@@ -19,7 +19,7 @@ const Lobby = ({playerId, matches, maps, onRequestJoin, onMatchCreate}) =>  (
       {matches.map((element, idx) => {
         return (
           <div key={idx}  className={`parity-${idx % 2 == 0 ? 'even' : 'odd'}`}>
-            <MatchListing {...element} onJoin={function() { onRequestJoin(playerId, element.id) }} />
+            <MatchListing {...element} onJoin={function() { onRequestJoin(playerId, element.matchId) }} />
           </div>
         )
       })}

@@ -114,34 +114,34 @@ class Socket {
 
       // TO BE REMOVED
       document.addEventListener('keydown', (evt) => {
-      console.log('evt', evt)
-      if (includes(['KeyW', 'KeyA', 'KeyS', 'KeyD'], evt.code)) {
-        evt.preventDefault()
-        evt.stopPropagation()
+        console.log('evt', evt)
+        if (includes(['KeyW', 'KeyA', 'KeyS', 'KeyD'], evt.code)) {
+          evt.preventDefault()
+          evt.stopPropagation()
 
-        let newCoords = stateStore.getState().scenario.armies[0].units[this.testcounter % 2].coordinate
-        newCoords.y++
+          let newCoords = stateStore.getState().scenario.armies[0].units[this.testcounter % 2].coordinate
 
-        console.log('NEWCOORDS', newCoords)
+          if (evt.code === 'KeyW') newCoords.y--
+          if (evt.code === 'KeyS') newCoords.y++
+          if (evt.code === 'KeyA') newCoords.x--
+          if (evt.code === 'KeyD') newCoords.x++
 
-        this.socket.send(JSON.stringify({
-          matchId: '00000000000000000000000000000000',
-          type: 'action',
-          name: 'move',
-          playerId: clientId,
-          to: newCoords,
-          unit: {
-            id: stateStore.getState().scenario.armies[0].units[this.testcounter % 2].id
-          }
-        }))
+          console.log('NEWCOORDS', newCoords)
 
-        this.testcounter++
-      }
-    }, false)
+          this.socket.send(JSON.stringify({
+            matchId: matchId,
+            type: 'action',
+            name: 'move',
+            playerId: clientId,
+            to: newCoords,
+            unit: {
+              id: stateStore.getState().scenario.armies[0].units[this.testcounter % 2].id
+            }
+          }))
 
-
-
-
+          this.testcounter++
+        }
+      }, false)
     }
   }
 
@@ -175,7 +175,21 @@ class Socket {
 
   getMapList() {
     this.socket.send(JSON.stringify({
-      type: 'listMaps',
+      type: 'listMaps'
+    }))
+  }
+
+  move (unit, to) {
+    console.log('Move Unit')
+    this.socket.send(JSON.stringify({
+      matchId: matchId,
+      type: 'action',
+      name: 'move',
+      playerId: clientId,
+      to: to,
+      unit: {
+        id: unit.id
+      }
     }))
   }
 }
