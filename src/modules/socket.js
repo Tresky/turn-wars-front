@@ -25,16 +25,27 @@ function onmessage (json) {
         'id': message.playerId,
       })
       this.getMatchList()
+      this.getMapList()
       break
     case 'matchList':
-      console.log(message)
+      console.log(' - Match List')
       store.dispatch({
         'type': 'UPDATE_MATCH_LIST',
         'matches': message.matches
       })
       break
+    case 'mapList':
+      console.log(' - Map List')
+      store.dispatch({
+        'type': 'UPDATE_MAP_LIST',
+        'maps': message.maps
+      })
+      break
     case 'matchLobby':
       console.log(' - Match Lobby')
+      break
+    case 'matchCreated':
+      this.getMatchList()
       break
     case 'gameStateChange':
       console.log(' - Game State Change')
@@ -147,10 +158,24 @@ class Socket {
     }))
   }
 
+  createMatch(playerId, matchInfo) {
+    this.socket.send(JSON.stringify({
+      type: 'create',
+      playerId: playerId,
+      scenario: matchInfo.name,
+    }))
+  }
+
   getMatchList() {
     console.log('sending listMatches')
     this.socket.send(JSON.stringify({
       type: 'listMatches',
+    }))
+  }
+
+  getMapList() {
+    this.socket.send(JSON.stringify({
+      type: 'listMaps',
     }))
   }
 }

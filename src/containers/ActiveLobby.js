@@ -9,7 +9,8 @@ const getAvailableMatches = (matches) => {
 const mapStateToProps = state => {
   return {
     matches: getAvailableMatches(state.matches.list),
-    playerId: state.matches.playerId
+    playerId: state.matches.playerId,
+    maps: state.maps.maps
   }
 }
 
@@ -17,6 +18,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onRequestJoin: (playerId, matchId) => {
       socket.requestJoin(playerId, matchId)
+    },
+    onMatchCreate: (playerId, matchInfo) => {
+      socket.createMatch(playerId, matchInfo)
     }
   }
 }
